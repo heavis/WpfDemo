@@ -1,0 +1,40 @@
+﻿<Window x:Class="HeaviSoft.Wpf.ErrorDemo.PersonalStatusWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HeaviSoft.Wpf.ErrorDemo"
+        xmlns:converter="clr-namespace:HeaviSoft.Wpf.ErrorDemo.Conveters"
+        mc:Ignorable="d"
+        Title="高富帅测试" Height="200" Width="500">
+    <Window.Resources>
+        <converter:PersonalStatusConverter x:Key="PersonalStatusConverter"></converter:PersonalStatusConverter>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="5" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="0">
+            <Label Content="身高(CM)：" />
+            <TextBox  Name="TBoxHeight"  Width="60"/>
+            <Label Content="颜值(0-10)：" />
+            <TextBox Name="TBoxScore" Width="60" />
+            <Label Content="存款（元）：" />
+            <TextBox Name="TBoxSaving" Width="100" />
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
+            <Label Content="测试结果：" />
+            <TextBox IsReadOnly="True" Width="150">
+                <TextBox.Text>
+                    <MultiBinding Converter="{StaticResource PersonalStatusConverter}">
+                        <Binding ElementName="TBoxHeight" Path="Text" />
+                        <Binding ElementName="TBoxScore" Path="Text" />
+                        <Binding ElementName="TBoxSaving" Path="Text" />
+                    </MultiBinding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+    </Grid>
+</Window>

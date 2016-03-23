@@ -1,0 +1,38 @@
+﻿<Window x:Class="HeaviSoft.Wpf.ErrorDemo.PortraitWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HeaviSoft.Wpf.ErrorDemo"
+        xmlns:converter="clr-namespace:HeaviSoft.Wpf.ErrorDemo.Conveters"
+        mc:Ignorable="d"
+        Title="是不是美女" Height="400" Width="600">
+    <Window.Resources>
+        <converter:SubConverter x:Key="SubConverter"></converter:SubConverter>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="KaiTi" />
+            <Setter Property="Foreground" Value="Honeydew" />
+        </Style>
+    </Window.Resources>
+    <ListBox ItemsSource="{Binding PortaitList}">
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <Border Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}, Converter={StaticResource SubConverter}, ConverterParameter=10, Path=ActualWidth}" BorderThickness="0, 0, 0, 1" BorderBrush="Gray">
+                    <DockPanel  VerticalAlignment="Center" LastChildFill="False">
+                        <Image Margin="5, 0" DockPanel.Dock="Left" Source="{Binding Photo}" Width="40" Height="40" />
+                        <TextBlock DockPanel.Dock="Left" Text="{Binding Name}" VerticalAlignment="Center" />
+                        <TextBlock DockPanel.Dock="Left" Text=", " VerticalAlignment="Center" />
+                        <TextBlock DockPanel.Dock="Left" Text="{Binding Birthday}" VerticalAlignment="Center" />
+                        <TextBlock DockPanel.Dock="Left" Text=", "  VerticalAlignment="Center" />
+                        <TextBlock DockPanel.Dock="Left" Text="{Binding Vocation}" VerticalAlignment="Center" />
+                        <Button Margin="0,3, 5, 3" Padding="4, 2" 
+                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:PortraitWindow}}, Path=DataContext.DeleteCommand}" CommandParameter="{Binding .}" DockPanel.Dock="Right" Content="Delete" />
+                    </DockPanel>
+                </Border>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+</Window>

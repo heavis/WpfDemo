@@ -1,0 +1,30 @@
+﻿<Window x:Class="HeaviSoft.Wpf.ErrorDemo.DataBindingModeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HeaviSoft.Wpf.ErrorDemo"
+        mc:Ignorable="d"
+        Title="DataBindingMode" Height="400" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" VerticalAlignment="Center" Orientation="Horizontal">
+            <Label Content="Modify: " />
+            <TextBox Width="100" VerticalAlignment="Center" Name="TBoxText" Text="{Binding TBoxText}" />
+            <TextBlock Margin="5,0,0,0" Text="Source:" />
+            <TextBlock Text="{Binding TBoxText, Mode=Default, UpdateSourceTrigger=PropertyChanged}" Width="100" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Horizontal">
+            <Label Content="TextBox Binding: " />
+            <TextBlock Width="100" VerticalAlignment="Center" Name="TBoxTBlock" Text="{Binding TBlockText}" />
+        </StackPanel>
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" Orientation="Vertical">
+            <Label Content="Binding Result: " />
+            <TextBox Grid.Row="2" TextWrapping="Wrap" Height="100" Name="TBoxResult" />
+        </StackPanel>
+    </Grid>
+</Window>
